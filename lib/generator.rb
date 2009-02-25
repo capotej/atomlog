@@ -27,7 +27,7 @@ module AtomLog
     def line_to_xml(line)
       @builder.entry do
         @builder.id @u.generate
-        @builder.updated "#{line[:year]}-#{line[:month]}-#{line[:day]}"
+        @builder.updated "#{line[:date]}"
         @builder.summary do
           "#{line[:msg]}"
         end

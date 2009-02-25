@@ -19,15 +19,16 @@ module AtomLog
 
     def self.parse_log_line(l)
       res = {}
-      line = l.split
-      middle = l.split('[')[1].to_s.split(']')[0].to_s.split
+      line = l.split('[')[1].to_s.split(']')
+      middle = line[0].to_s.split
       pid = middle.pop
       date = middle
+      severity,msg = line[1].to_s.split('--')
       res[:date] = date.join(' ')
-      res[:severity_id] = line[0].gsub(',','')
+      res[:severity_id] = l.split[0].to_s.gsub(',','')
       res[:pid] = pid.to_s.gsub('#','')
-      res[:severity] = line[9]
-      res[:msg] = line[12]
+      res[:severity] = severity.to_s.gsub(' ','')
+      res[:msg] = msg
       res
     end
 
