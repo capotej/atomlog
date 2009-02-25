@@ -1,1 +1,0 @@
-require 'atom_log'
