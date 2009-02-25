@@ -43,8 +43,9 @@ class TestParser < Test::Unit::TestCase
   def atest_parse_msg
     res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
     res2 = AtomLog::Parser.parse_log_line(ANOTHER_LOG_LINE)
-    #puts res2[:msg]
-    #assert_equal "info.", res[:msg]
+    assert_equal "test", res[:msg]
+    assert_equal "test.", res[:msg]
+
   end
 
   def test_parse_arr_not_empty
