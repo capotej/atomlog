@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'builder'
+
 module AtomLog
 
   class Parser
@@ -8,9 +11,9 @@ module AtomLog
 
     def read
       if File.exists?(@log)
-        File.open(@log).read
+        File.open(@log)
       else
-        nil
+        false
       end
     end
 
@@ -31,13 +34,17 @@ module AtomLog
       res[:msec] = line[7]
       res[:pid] = line[8].gsub('#','').gsub(']','')
       res[:severity] = line[9]
-      res[:name] = line[11].gsub(':','')
       res[:msg] = line[12]
       res
     end
 
-
-
+    def parse
+      arr = []
+      self.read.each_line do |line|
+        arr << AtomLog::Parser.parse_log_line(line)
+      end
+      arr
+    end
 
   end
 

@@ -10,6 +10,11 @@ class TestParser < Test::Unit::TestCase
     assert TEST_PARSER.read
   end
 
+  def test_fail_file_open
+    assert_equal false, FAIL_PARSER.read
+  end
+
+
   def test_parse_severity_id
     res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
     assert_equal "I", res[:severity_id]
@@ -70,15 +75,14 @@ class TestParser < Test::Unit::TestCase
     assert_equal "INFO", res[:severity]
   end
 
-  def test_parse_name
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "Main", res[:name]
-  end
-
   def test_parse_msg
     res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
     assert_equal "info.", res[:msg]
   end
 
+  def test_parse_arr_not_empty
+    res = TEST_PARSER.parse
+    assert res
+  end
     
 end
