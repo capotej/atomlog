@@ -2,7 +2,7 @@
 
 AtomLog is a library for converting ruby's Logger format into an Atom feed
 
-## Dependencies
+## Gem Dependencies
 
    Builder
 
@@ -10,6 +10,8 @@ AtomLog is a library for converting ruby's Logger format into an Atom feed
 
 ## Installation
 
+	gem install builder
+	gem install uuid
 	git clone git@github.com:jcapote/atomlog.git
 
 ## Usage
