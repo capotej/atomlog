@@ -1,5 +1,5 @@
-require 'lib/parser'
-require 'lib/generator'
+$:.unshift File.dirname(__FILE__)
+require 'atom_log'
 require 'test/unit'
 
 TEST_PARSER = AtomLog::Parser.new('test/fixtures/test.log')
