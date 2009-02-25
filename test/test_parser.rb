@@ -14,55 +14,18 @@ class TestParser < Test::Unit::TestCase
     assert_equal false, FAIL_PARSER.read
   end
 
+  def test_parse_date
+    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
+    res2 = AtomLog::Parser.parse_log_line(ANOTHER_LOG_LINE)
+    assert_equal "Wed Mar 03 02:34:24 JST 1999 895701", res[:date]
+    assert_equal "2009-02-23T17:26:09.959833", res2[:date]
+  end
+
+
 
   def test_parse_severity_id
     res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
     assert_equal "I", res[:severity_id]
-  end
-
-  def test_parse_weekday
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "Wed", res[:weekday]
-  end
-    
-  def test_parse_month
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "Mar", res[:month]
-  end
-
-  def test_parse_day
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "03", res[:day]
-  end
-  
-  def test_parse_hour
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "02", res[:hour] 
-  end
-  
-  def test_parse_minute
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "34", res[:minute]
-  end
-
-  def test_parse_second
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "24", res[:second]
-  end
-
-  def test_parse_tz
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "JST", res[:tz]
-  end
-
-  def test_parse_year
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "1999", res[:year]
-  end
-
-  def test_parse_msec
-    res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
-    assert_equal "895701", res[:msec]
   end
 
   def test_parse_pid

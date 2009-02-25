@@ -20,13 +20,4 @@ class TestGenerator < Test::Unit::TestCase
   end
 
 
-
-
-
-
-
-
-  
-
-
 end

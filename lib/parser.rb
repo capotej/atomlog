@@ -20,23 +20,19 @@ module AtomLog
     def self.parse_log_line(l)
       res = {}
       line = l.split
-      hour,minute,second = line[4].split(':')
-      
+      middle = l.split('[')[1].to_s.split(']')[0].to_s.split
+      pid = middle.pop
+      date = middle
+      res[:date] = date.join(' ')
       res[:severity_id] = line[0].gsub(',','')
-      res[:weekday] = line[1].gsub('[','')
-      res[:month] = line[2]
-      res[:day] = line[3]
-      res[:hour] = hour
-      res[:minute] = minute
-      res[:second] = second
-      res[:tz] = line[5]
-      res[:year] = line[6]
-      res[:msec] = line[7]
-      res[:pid] = line[8].gsub('#','').gsub(']','')
+      res[:pid] = pid.to_s.gsub('#','')
       res[:severity] = line[9]
       res[:msg] = line[12]
       res
     end
+
+
+
 
     def parse
       arr = []
