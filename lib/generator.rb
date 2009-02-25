@@ -1,6 +1,3 @@
-require 'builder'
-require 'uuid'
-
 module AtomLog
 
   class Generator
@@ -12,30 +9,32 @@ module AtomLog
       @u = UUID.new
     end
     
-    def generate_xml
-      @builder.feed :xmlns => "http://www.w3.org/2005/Atom" do
-        @builder.title "AtomLog"
-        @builder.subtitle "AtomLog for a log"
-        @builder.updated Time.now
-        @builder.author do
-          @builder.name "AtomLog"
-        end
-        @builder.id @u.generate
+    def preamble_xml
+      @builder.title "AtomLog"
+      @builder.subtitle "AtomLog for a log"
+      @builder.updated Time.now
+      @builder.author do
+        @builder.name "AtomLog"
       end
+      @builder.id @u.generate
     end
 
     def line_to_xml(line)
       @builder.entry do
         @builder.id @u.generate
         @builder.updated line[:date]
+        @builder.pid line[:pid]
+        @builder.title "#{line[:severity]} -- #{line[:pid]}"
         @builder.summary line[:msg]
       end
     end
 
     def to_atom
-      self.generate_xml
-      @rows.each do |row|
-        self.line_to_xml(row)
+      @builder.feed :xmlns => "http://www.w3.org/2005/Atom" do
+        self.preamble_xml
+        @rows.each do |row|
+          self.line_to_xml(row)
+        end
       end
       @xml
     end

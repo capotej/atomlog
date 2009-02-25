@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'builder'
-
 module AtomLog
 
   class Parser
