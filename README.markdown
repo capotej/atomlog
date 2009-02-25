@@ -31,10 +31,10 @@ to your application's load path and then:
 
 Out of curiousity, I decided to benchmark reading a 4.4mb log file against all the ruby implementations on my machine, here are the results:
 
-       	ruby 1.8.6 (2007-09-24 patchlevel 111) [universal-darwin9.0]: 53s
-	ruby 1.9.1p0 (2009-01-30 revision 21907) [i386-darwin9.2.0]: 30s *FASTEST*
-	jruby 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]: 46s
-	jruby --server 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]: 34s   
+        ruby 1.8.6 (2007-09-24 patchlevel 111) [universal-darwin9.0]: 53s
+        ruby 1.9.1p0 (2009-01-30 revision 21907) [i386-darwin9.2.0]: 30s *FASTEST*
+        jruby 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]: 46s
+        jruby --server 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]: 34s   
 	
 
 ## License and Author
