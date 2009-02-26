@@ -8,23 +8,33 @@ AtomLog is a library for converting ruby's Logger format into an Atom feed
 
    UUID
 
+   file-tail   
+
 ## Installation
 
 	gem install builder
 	gem install uuid
+	gem install file-tail
 	git clone git@github.com:jcapote/atomlog.git
 
 ## Usage
 
 It comes with a standalone tool, bin/log2atom.rb; use as such:
-   	 bin/log2atom.rb logger-file.log
+
+   bin/log2atom.rb logger-file.log
 
 You can also use it from within your applications (it's intended purpose) by adding atomlog
-to your application's load path and then:
+to your application's load path:
 
-   	 require 'atom_log'
-	 a = AtomLog::Generator.new('path/to/log.log')
-	 a.to_atom
+      require 'atom_log'
+      a = AtomLog::Generator.new('path/to/log.log')
+      a.to_atom
+
+For large or rapidly growing log files, sometimes it's useful only to see the last 10 or so events; To achieve this, just pass how many lines back you want to go to the generator constructor as the 2nd argument:
+
+      require 'atom_log'
+      a = AtomLog::Generator.new('path/to/log.log', 100)
+      a.to_atom
 
 
 ## Performance

@@ -1,17 +1,15 @@
 module AtomLog
 
+  class LogFile < File
+    include File::Tail
+  end
+
+
   class Parser
 
-    def initialize(log)
+    def initialize(log, lines = nil)
+      @lines = lines || 10
       @log = log
-    end
-
-    def read
-      if File.exists?(@log)
-        File.open(@log)
-      else
-        false
-      end
     end
 
     def self.parse_log_line(l)
@@ -29,12 +27,10 @@ module AtomLog
       res
     end
 
-
-
-
     def parse
       arr = []
-      self.read.each_line do |line|
+      log = LogFile.new(@log)
+      log.tail(@lines) do |line|
         arr << AtomLog::Parser.parse_log_line(line)
       end
       arr

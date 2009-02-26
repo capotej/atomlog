@@ -6,22 +6,12 @@ class TestParser < Test::Unit::TestCase
     assert TEST_PARSER
   end
 
-  def test_file_open
-    assert TEST_PARSER.read
-  end
-
-  def test_fail_file_open
-    assert_equal false, FAIL_PARSER.read
-  end
-
   def test_parse_date
     res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)
     res2 = AtomLog::Parser.parse_log_line(ANOTHER_LOG_LINE)
     assert_equal "Wed Mar 03 02:34:24 JST 1999 895701", res[:date]
     assert_equal "2009-02-23T17:26:09.959833", res2[:date]
   end
-
-
 
   def test_parse_severity_id
     res = AtomLog::Parser.parse_log_line(TEST_LOG_LINE)

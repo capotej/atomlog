@@ -2,8 +2,8 @@ module AtomLog
 
   class Generator
 
-    def initialize(file)
-      @rows = AtomLog::Parser.new(file).parse
+    def initialize(file, lines = nil)
+      @rows = AtomLog::Parser.new(file, lines).parse
       @builder = Builder::XmlMarkup.new(:target => @xml = "")
       @builder.instruct! :xml, :version => "1.0", :encoding => "utf-8"
       @u = UUID.new
