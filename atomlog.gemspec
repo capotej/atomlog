@@ -2,16 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{atomlog}
-  s.version = "1.0.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["jcapote"]
   s.date = %q{2009-02-26}
-  s.default_executable = %q{log2atom.rb}
+  s.default_executable = %q{log2atom}
   s.description = %q{A library for parsing ruby's Logger format into an Atom feed}
   s.email = %q{jcapote@gmail.com}
-  s.executables = ["log2atom.rb"]
-  s.files = ["README.markdown", "VERSION.yml", "bin/log2atom.rb", "lib/generator.rb", "lib/parser.rb", "test/fixtures", "test/fixtures/test.log", "test/helper.rb", "test/test_generator.rb", "test/test_parser.rb"]
+  s.executables = ["log2atom"]
+  s.files = ["README.markdown", "VERSION.yml", "bin/log2atom", "lib/generator.rb", "lib/parser.rb", "test/fixtures", "test/fixtures/test.log", "test/helper.rb", "test/test_generator.rb", "test/test_parser.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/jcapote/atomlog}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
