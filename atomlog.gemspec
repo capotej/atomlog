@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{atomlog}
-  s.version = "1.1.0"
+  s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["jcapote"]
-  s.date = %q{2009-02-26}
+  s.date = %q{2009-02-27}
   s.default_executable = %q{log2atom}
   s.description = %q{A library for parsing ruby's Logger format into an Atom feed}
   s.email = %q{jcapote@gmail.com}
