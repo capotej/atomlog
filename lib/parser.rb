@@ -1,9 +1,5 @@
 module AtomLog
 
-  class LogFile < File
-    include File::Tail
-  end
-
 
   class Parser
 
@@ -29,7 +25,7 @@ module AtomLog
 
     def parse
       arr = []
-      log = LogFile.new(@log)
+      log = File::Tail::Logfile.open(@log, :return_if_eof => true, :backward => @lines)
       log.tail(@lines) do |line|
         arr << AtomLog::Parser.parse_log_line(line)
       end
