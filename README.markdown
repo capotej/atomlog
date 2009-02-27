@@ -2,50 +2,58 @@
 
 AtomLog is a library for converting ruby's Logger format into an Atom feed
 
-## Gem Dependencies
-
-   Builder
-
-   UUID
-
-   file-tail   
-
 ## Installation
 
-	gem install builder
-	gem install uuid
-	gem install file-tail
-	git clone git@github.com:jcapote/atomlog.git
+Add the github gem source if you haven't already:
+    
+    gem sources -a http://gems.github.com
+    
+Install the gem:
+
+    gem install jcapote-atomlog
 
 ## Usage
 
-It comes with a standalone tool, bin/log2atom.rb; use as such:
+### From within your applications:
 
-   bin/log2atom.rb logger-file.log
+Basic usage:
 
-You can also use it from within your applications (it's intended purpose) by adding atomlog
-to your application's load path:
+    require 'atom_log'
+    a = AtomLog::Generator.new('path/to/log.log')
+    a.to_atom #=> feed as a string
 
-      require 'atom_log'
-      a = AtomLog::Generator.new('path/to/log.log')
-      a.to_atom
+For large or rapidly growing log files, it's useful only to see the last 10 or so events; To achieve this, just pass how many lines back you want to go to the generator constructor as the 2nd argument:
 
-For large or rapidly growing log files, sometimes it's useful only to see the last 10 or so events; To achieve this, just pass how many lines back you want to go to the generator constructor as the 2nd argument:
+    require 'atom_log'
+    a = AtomLog::Generator.new('path/to/log.log', 100)
+    a.to_atom #=> feed as a string
 
-      require 'atom_log'
-      a = AtomLog::Generator.new('path/to/log.log', 100)
-      a.to_atom
+Or if you want to parse the log file into your own format (sql, json, etc), you can use the parser directly (this also takes the lines desired as the 2nd argument):
+
+    require 'atom_log'
+    a = AtomLog::Parser.new('path/to/log.log', 100)
+    a.parse #=> array of log fields
+
+### From the shell:
+
+It comes with a standalone tool, log2atom; use as such:
+
+    log2atom logger-file.log
 
 
 ## Performance
 
 Out of curiousity, I decided to benchmark reading a 4.4mb log file against all the ruby implementations on my machine, here are the results:
 
-        ruby 1.8.6 (2007-09-24 patchlevel 111) [universal-darwin9.0]: 53s
-        ruby 1.9.1p0 (2009-01-30 revision 21907) [i386-darwin9.2.0]: 30s *FASTEST*
-        jruby 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]: 46s
-        jruby --server 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]: 34s   
-	
+
+    30s: ruby 1.9.1p0 (2009-01-30 revision 21907) [i386-darwin9.2.0]
+
+    34s: jruby --server 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]
+
+    46s: jruby 1.1.6RC1 (ruby 1.8.6 patchlevel 114) (2008-12-03 rev 8263) [i386-java]
+
+    53s: ruby 1.8.6 (2007-09-24 patchlevel 111) [universal-darwin9.0]
+
 
 ## License and Author
 
